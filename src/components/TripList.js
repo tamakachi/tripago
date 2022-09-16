@@ -1,6 +1,8 @@
+// Style
+
+import './TripList.css'
 
 import {useState, useEffect} from 'react'
-
 
 export default function TripList() {
     const [trips,setTrips] = useState([]) 
@@ -16,7 +18,7 @@ export default function TripList() {
         },[])
 
   return (
-    <div>
+    <div className='trip-list'>
         <h2>Trip List</h2>
         <ul>
             {trips.map(trip => (
