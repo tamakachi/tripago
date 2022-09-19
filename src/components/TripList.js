@@ -6,16 +6,17 @@ import {useState, useEffect} from 'react'
 
 export default function TripList() {
     const [trips,setTrips] = useState([]) 
+    const [url,setUrl] = useState("http://localhost:3000/trips")
 
 // To run a code block once and only once with useEffect, make the second argument array empty, this array is
 // known as the dependency array
     useEffect(()=>{
 
-        fetch ("http://localhost:3000/trips")
+        fetch (url)
           .then(response=>response.json())
           .then(json=>setTrips(json))
-          console.log(trips)
-        },[])
+          
+        },[url])
 
   return (
     <div className='trip-list'>
@@ -28,6 +29,11 @@ export default function TripList() {
                 </li>
             ))}
         </ul>
+        <div>
+            <button onClick={()=>{setUrl("http://localhost:3000/trips?loc=Europe")}}>European Trips</button>
+            <button onClick={()=>{setUrl("http://localhost:3000/trips")}}>All trips</button>
+        </div>
     </div>
+    
   )
 }
