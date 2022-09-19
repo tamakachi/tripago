@@ -2,11 +2,17 @@
 
 import './TripList.css'
 
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useCallback} from 'react'
 
 export default function TripList() {
     const [trips,setTrips] = useState([]) 
     const [url,setUrl] = useState("http://localhost:3000/trips")
+    const [message,setMessage] = useState("Hello user")
+
+
+    const printJson = useCallback(() => {
+        console.log(message);
+      }, [message]);
 
 // To run a code block once and only once with useEffect, make the second argument array empty, this array is
 // known as the dependency array
@@ -18,8 +24,8 @@ export default function TripList() {
         fetch (url)
           .then(response=>response.json())
           .then(json=>setTrips(json))
-          
-        },[url])
+            printJson()
+        },[url,printJson])
 
   return (
     <div className='trip-list'>
