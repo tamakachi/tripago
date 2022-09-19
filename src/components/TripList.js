@@ -10,6 +10,9 @@ export default function TripList() {
 
 // To run a code block once and only once with useEffect, make the second argument array empty, this array is
 // known as the dependency array
+
+// When using a function inside useEffect, be sure to use the useCallback hook
+// Otherwise the function will execute every time the app remounts
     useEffect(()=>{
 
         fetch (url)
@@ -29,7 +32,7 @@ export default function TripList() {
                 </li>
             ))}
         </ul>
-        <div>
+        <div className='filters'>
             <button onClick={()=>{setUrl("http://localhost:3000/trips?loc=Europe")}}>European Trips</button>
             <button onClick={()=>{setUrl("http://localhost:3000/trips")}}>All trips</button>
         </div>
