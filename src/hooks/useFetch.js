@@ -18,7 +18,7 @@ const useFetch = (url) => {
 
     
 
-    return{data: data}
+    return{data: data, isPending}
     
 }
 
