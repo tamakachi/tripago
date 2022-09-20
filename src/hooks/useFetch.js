@@ -8,9 +8,10 @@ const useFetch = (url) => {
             const json = await res.json()
             setData(json)
         }
+        fetchData()
     },[url])
 
-    fetchData()
+    
 
     return{data: data}
     

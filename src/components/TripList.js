@@ -3,39 +3,19 @@
 import './TripList.css'
 
 import {useState, useEffect, useCallback} from 'react'
+import useFetch from '../hooks/useFetch'
 
 export default function TripList() {
-    const [trips,setTrips] = useState([]) 
     const [url,setUrl] = useState("http://localhost:3000/trips")
-    const [message,setMessage] = useState("Hello user")
+    const {data:trips} = useFetch(url)
 
-// Be sure that the dependencies in the useCallback function do not
-// Also get triggered by the useEffect that triggers it, otherwise
-// It will create an infinite loop
 
-    const printJson = useCallback(() => {
-        console.log(message);
-      }, [message]);
-
-// To run a code block once and only once with useEffect, make the second argument array empty, this array is
-// known as the dependency array
-
-// When using a function inside useEffect, be sure to use the useCallback hook
-// Otherwise the function will execute every time the app remounts
-
-    useEffect(()=>{
-
-        fetch (url)
-          .then(response=>response.json())
-          .then(json=>setTrips(json))
-            printJson()
-        },[url,printJson])
 
   return (
     <div className='trip-list'>
         <h2>Trip List</h2>
         <ul>
-            {trips.map(trip => (
+            {trips && trips.map(trip => (
                 <li key={trip.id}>
                     <h2>{trip.title}</h2>
                     <h2>{trip.price}</h2>
